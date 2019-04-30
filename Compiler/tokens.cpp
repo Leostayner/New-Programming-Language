@@ -1,6 +1,6 @@
-#line 2 "flk_l.c"
+#line 2 "tokens.cpp"
 
-#line 4 "flk_l.c"
+#line 4 "tokens.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -323,9 +323,6 @@ void yyfree ( void *  );
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
-
-#define yywrap() (/*CONSTCOND*/1)
-#define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
 FILE *yyin = NULL, *yyout = NULL;
@@ -355,8 +352,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 7
-#define YY_END_OF_BUFFER 8
+#define YY_NUM_RULES 23
+#define YY_END_OF_BUFFER 24
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -364,10 +361,12 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[15] =
+static const flex_int16_t yy_accept[32] =
     {   0,
-        5,    5,    8,    6,    2,    3,    2,    5,    1,    4,
-        5,    1,    4,    0
+        0,    0,   24,   22,    1,    1,   21,   20,    9,   10,
+       17,   15,   14,   16,   13,   18,    4,    7,    5,    8,
+        2,   11,   19,   12,    3,    3,    6,    2,    3,    3,
+        0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -375,17 +374,17 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    4,    1,    1,    1,    1,    1,    1,    1,    5,
-        5,    5,    5,    1,    1,    1,    5,    6,    6,    6,
-        6,    6,    6,    6,    6,    6,    6,    1,    1,    5,
-        5,    5,    1,    1,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        1,    1,    1,    1,    1,    1,    7,    7,    7,    7,
+        1,    2,    4,    1,    1,    1,    1,    5,    1,    6,
+        7,    8,    9,   10,   11,   12,   13,   14,   14,   14,
+       14,   14,   14,   14,   14,   14,   14,    1,    1,   15,
+       16,   17,    1,    1,   18,   18,   18,   18,   18,   18,
+       18,   18,   18,   18,   18,   18,   18,   18,   18,   18,
+       18,   18,   18,   18,   18,   18,   18,   18,   18,   18,
+        1,    1,    1,    1,   18,    1,   18,   18,   18,   18,
 
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    1,    1,    1,    1,    1,    1,    1,    1,
+       18,   18,   18,   18,   18,   18,   18,   18,   18,   18,
+       18,   18,   18,   18,   18,   18,   18,   18,   18,   18,
+       18,   18,   19,   20,   21,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -402,35 +401,47 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[8] =
+static const YY_CHAR yy_meta[22] =
     {   0,
-        1,    1,    1,    2,    2,    1,    1
+        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1
     } ;
 
-static const flex_int16_t yy_base[16] =
+static const flex_int16_t yy_base[33] =
     {   0,
-        0,    0,   13,   14,   14,   14,    0,    0,    6,    2,
-        0,    5,    0,   14,    8
+        0,    0,   33,   34,   34,   34,   34,   34,   34,   34,
+       34,   34,   34,   34,   34,   34,   18,   34,   15,   34,
+        8,   34,   34,   34,   16,   15,   34,    9,   14,   11,
+       34,   23
     } ;
 
-static const flex_int16_t yy_def[16] =
+static const flex_int16_t yy_def[33] =
     {   0,
-       14,    1,   14,   14,   14,   14,   15,   15,   14,   14,
-       15,   14,   10,    0,   14
+       31,    1,   31,   31,   31,   31,   31,   31,   31,   31,
+       31,   31,   31,   31,   31,   31,   32,   31,   31,   31,
+       31,   31,   31,   31,   31,   32,   31,   31,   31,   32,
+        0,   31
     } ;
 
-static const flex_int16_t yy_nxt[22] =
+static const flex_int16_t yy_nxt[56] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   13,   13,   11,
-       12,   12,   14,    3,   14,   14,   14,   14,   14,   14,
-       14
+        4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
+       14,   15,   16,   17,   18,   19,   20,   21,   22,   23,
+       24,   28,   28,   25,   30,   28,   28,   29,   30,   29,
+       27,   26,   31,    3,   31,   31,   31,   31,   31,   31,
+       31,   31,   31,   31,   31,   31,   31,   31,   31,   31,
+       31,   31,   31,   31,   31
     } ;
 
-static const flex_int16_t yy_chk[22] =
+static const flex_int16_t yy_chk[56] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,   10,   10,   15,
-       12,    9,    3,   14,   14,   14,   14,   14,   14,   14,
-       14
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,   21,   28,   32,   30,   21,   28,   29,   26,   25,
+       19,   17,    3,   31,   31,   31,   31,   31,   31,   31,
+       31,   31,   31,   31,   31,   31,   31,   31,   31,   31,
+       31,   31,   31,   31,   31
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -447,20 +458,15 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "flk.lex"
-/*Source by Leonardo Pereira Medeiros*/
-/* Prelude to include C' input/output library */
-#line 6 "flk.lex"
-#include <stdio.h>
-#line 456 "flk_l.c"
-/* 1. Macros
+#line 1 "tokens.l"
+#line 2 "tokens.l"
+#include <string>
 
-/* Matches a single character contained between '0' and '9': a digit */
-/* Matches a single character contained between 'a' and 'z' or between
-   'A' and 'Z': a letter */
-/* Matches an ident: they start with a letter and continues with letters or digits */
-/* 2. Lexer rules. */
-#line 464 "flk_l.c"
+#define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
+#define TOKEN(t) (yylval.token = t)
+extern "C" int yywrap() { }
+#line 469 "tokens.cpp"
+#line 470 "tokens.cpp"
 
 #define INITIAL 0
 
@@ -677,12 +683,10 @@ YY_DECL
 		}
 
 	{
-#line 23 "flk.lex"
+#line 9 "tokens.l"
 
-#line 25 "flk.lex"
- /* Rule 1: if we meet a sequence of digits (ie. a number): do
-    nothing (meaning of `;`) and carry on the analysis: this is accepted. */
-#line 686 "flk_l.c"
+
+#line 690 "tokens.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -709,13 +713,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 15 )
+				if ( yy_current_state >= 32 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 14 );
+		while ( yy_base[yy_current_state] != 34 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -740,55 +744,124 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
+/* rule 1 can match eol */
 YY_RULE_SETUP
-#line 27 "flk.lex"
+#line 11 "tokens.l"
 ;
 	YY_BREAK
-/* Tabulations or spaces are also ignored */
 case 2:
 YY_RULE_SETUP
-#line 30 "flk.lex"
-;
+#line 12 "tokens.l"
+SAVE_TOKEN; return IDENTIFIER;
 	YY_BREAK
-/* New lines are ignored */
 case 3:
-/* rule 3 can match eol */
 YY_RULE_SETUP
-#line 33 "flk.lex"
-;
+#line 13 "tokens.l"
+SAVE_TOKEN; return DOUBLE;
 	YY_BREAK
-/* So are idents */
 case 4:
 YY_RULE_SETUP
-#line 36 "flk.lex"
-;
+#line 14 "tokens.l"
+SAVE_TOKEN; return INTEGER;
 	YY_BREAK
-/* And operators */
 case 5:
 YY_RULE_SETUP
-#line 39 "flk.lex"
-;
+#line 16 "tokens.l"
+return TOKEN(EQUAL);
 	YY_BREAK
-/* This matches the end of file (or end of input) [EOF].  If we reach
-    this point this means that we've only seen valid things: the
-    expression should be accepted. */
-case YY_STATE_EOF(INITIAL):
-#line 44 "flk.lex"
-{ puts ("This is a valid expression."); exit(0); }
-	YY_BREAK
-/* We are encoutering any single character (meaning of `.`) that is
-   not matched by previous rule: it is not valid. */
 case 6:
 YY_RULE_SETUP
-#line 48 "flk.lex"
-{ puts("Invalid expression!"); exit(1); }
+#line 17 "tokens.l"
+return TOKEN(CEQ);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 49 "flk.lex"
+#line 18 "tokens.l"
+return TOKEN(CLT);
+	YY_BREAK
+case 8:
+YY_RULE_SETUP
+#line 19 "tokens.l"
+return TOKEN(CGT);
+	YY_BREAK
+case 9:
+YY_RULE_SETUP
+#line 20 "tokens.l"
+return TOKEN(LPAREN);
+	YY_BREAK
+case 10:
+YY_RULE_SETUP
+#line 21 "tokens.l"
+return TOKEN(RPAREN);
+	YY_BREAK
+case 11:
+YY_RULE_SETUP
+#line 22 "tokens.l"
+return TOKEN(LBRACE);
+	YY_BREAK
+case 12:
+YY_RULE_SETUP
+#line 23 "tokens.l"
+return TOKEN(RBRACE);
+	YY_BREAK
+case 13:
+YY_RULE_SETUP
+#line 24 "tokens.l"
+return TOKEN(DOT);
+	YY_BREAK
+case 14:
+YY_RULE_SETUP
+#line 25 "tokens.l"
+return TOKEN(COMMA);
+	YY_BREAK
+case 15:
+YY_RULE_SETUP
+#line 26 "tokens.l"
+return TOKEN(PLUS);
+	YY_BREAK
+case 16:
+YY_RULE_SETUP
+#line 27 "tokens.l"
+return TOKEN(MINUS);
+	YY_BREAK
+case 17:
+YY_RULE_SETUP
+#line 28 "tokens.l"
+return TOKEN(MUL);
+	YY_BREAK
+case 18:
+YY_RULE_SETUP
+#line 29 "tokens.l"
+return TOKEN(DIV);
+	YY_BREAK
+case 19:
+YY_RULE_SETUP
+#line 30 "tokens.l"
+return TOKEN(OR);
+	YY_BREAK
+case 20:
+YY_RULE_SETUP
+#line 31 "tokens.l"
+return TOKEN(AND);
+	YY_BREAK
+case 21:
+YY_RULE_SETUP
+#line 32 "tokens.l"
+return TOKEN(NOT);
+	YY_BREAK
+case 22:
+YY_RULE_SETUP
+#line 34 "tokens.l"
+printf("Unknown token!n"); yyterminate();
+	YY_BREAK
+case 23:
+YY_RULE_SETUP
+#line 36 "tokens.l"
 ECHO;
 	YY_BREAK
-#line 792 "flk_l.c"
+#line 863 "tokens.cpp"
+case YY_STATE_EOF(INITIAL):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1083,7 +1156,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 15 )
+			if ( yy_current_state >= 32 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1111,11 +1184,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 15 )
+		if ( yy_current_state >= 32 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 14);
+	yy_is_jam = (yy_current_state == 31);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1791,5 +1864,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 49 "flk.lex"
+#line 36 "tokens.l"
 
