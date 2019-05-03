@@ -54,8 +54,8 @@ extern int yydebug;
     CGT = 264,
     LPAREN = 265,
     RPAREN = 266,
-    LBRCE = 267,
-    RBRCE = 268,
+    LBRACE = 267,
+    RBRACE = 268,
     DOT = 269,
     COMMA = 270,
     PLUS = 271,
@@ -65,16 +65,9 @@ extern int yydebug;
     OR = 275,
     AND = 276,
     NOT = 277,
-    while = 278,
-    if = 279,
-    else = 280,
-    char = 281,
-    double = 282,
-    float = 283,
-    identifier = 284,
-    int = 285,
-    string = 286,
-    void = 287
+    WHILE = 278,
+    IF = 279,
+    ELSE = 280
   };
 #endif
 
@@ -83,11 +76,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 10 "parser.y" /* yacc.c:1909  */
+#line 8 "parser.y" /* yacc.c:1909  */
 
+    std::string *string;
 	int token;
 
-#line 91 "parser.hpp" /* yacc.c:1909  */
+#line 85 "parser.hpp" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

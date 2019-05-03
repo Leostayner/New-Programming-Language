@@ -8,21 +8,21 @@
 
 
 %union {
+    std::string *string;
 	int token;
 }
 
 
 %token  IDENTIFIER DOUBLE INTEGER
 %token  EQUAL CEQ CLT CGT
-%token  LPAREN RPAREN LBRCE RBRCE
+%token  LPAREN RPAREN LBRACE RBRACE
 %token  DOT COMMA
 %token  PLUS MINUS MUL DIV
 %token  OR AND NOT
+%token  WHILE IF ELSE
 
 
-%token while if else
-%token char double float identifier int string void
-%token character-constant floating-constant integer-constant
+%token DOUBLE INTEGER 
 %token type-name
 
 
@@ -30,7 +30,6 @@
 %left MUL DIV
 
 %start translation-unit 
-       
 
 %%
 
@@ -48,17 +47,14 @@ declaration-specifier
     : type-specifier
                         
 type-specifier 
-    : void
-    | char
-    | int
-    | float
-    | double
+    : INTEGER
+    | DOUBLE
                         
 declarator 
     : direct-declarator
 
 direct-declarator 
-    : identifier
+    : IDENTIFIER
                       
 constant-expression 
     : inclusive-or-expression
@@ -102,19 +98,13 @@ unary-expression
 postfix-expression 
     : primary-expression
     | postfix-expression LPAREN {assignment-expression} RPAREN
-    | postfix-expression DOT identifier
+    | postfix-expression DOT IDENTIFIER
                        
                   
 primary-expression 
-    : identifier
-    | constant
-    | string
+    : IDENTIFIER
     | LPAREN expression RPAREN
 
-constant 
-    : integer-constant
-    | character-constant
-    | floating-constant
 
 expression 
     : assignment-expression
@@ -163,11 +153,10 @@ expression-statement
     : {expression};
 
 selection-statement 
-    : if LPAREN expression RPAREN statement
-    | if LPAREN expression RPAREN statement else statement
+    : IF LPAREN expression RPAREN statement
+    | IF LPAREN expression RPAREN statement ELSE statement
 
 iteration-statement 
-    : while LPAREN expression RPAREN statement
-
+    : WHILE LPAREN expression RPAREN statement
 
 %%
