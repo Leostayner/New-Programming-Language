@@ -1,45 +1,57 @@
 %{
-#include <string>
 
-#include "parser.hpp"
-#define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
-#define TOKEN(t) (yylval.token = t)
+#include <stdio.h>
+#include <string.h>
+#include "parser.tab.h"
+void showError();
 %}
 
-%option noyywrap
+
+numbers     ([0-9])+
+alpha       ([a-zA-Z])+
 
 %%
-
 [ \t\n]                 ;
-
-"if"                    return TOKEN(IF); 
-"else"                  return TOKEN(ELSE); 
-"while"                 return TOKEN(WHILE); 
+"int"              {return (INTEGER);}
+"double"           {return (DOUBLE);}
 
 
-[a-zA-Z_][a-zA-Z0-9_]*  SAVE_TOKEN; return IDENTIFIER;
-[0-9]+.[0-9]*           SAVE_TOKEN; return DOUBLE;
-[0-9]+                  SAVE_TOKEN; return INTEGER;
+"if"                    {return (IF); }
+"else"                  {return (ELSE); }
+"while"                 {return (WHILE);} 
 
 
-"="                     return TOKEN(EQUAL);
-"=="                    return TOKEN(CEQ);
-"<"                     return TOKEN(CLT);
-">"                     return TOKEN(CGT);
-"("                     return TOKEN(LPAREN);
-")"                     return TOKEN(RPAREN);
-"{"                     return TOKEN(LBRACE);
-"}"                     return TOKEN(RBRACE);
-"."                     return TOKEN(DOT);
-","                     return TOKEN(COMMA);
-"+"                     return TOKEN(PLUS);
-"-"                     return TOKEN(MINUS);
-"*"                     return TOKEN(MUL);
-"/"                     return TOKEN(DIV);
-"|"                     return TOKEN(OR);
-"&"                     return TOKEN(AND);
-"!"                     return TOKEN(NOT);
 
-.                       printf("Unknown token!n"); yyterminate();
+{alpha}			   {sscanf(yytext, "%s", yylval.name); return (IDENTIFIER);}
+{numbers}          {yylval.number = atoi(yytext); return (NUM);}
+
+";"                     {return (SEMICOLON);}
+
+
+"="                     {return (EQUAL);}
+"=="                    {return (CEQ);}
+"<"                     {return (CLT);}
+">"                     {return (CGT);}
+"("                     {return (LPAREN);}
+")"                     {return (RPAREN);}
+"{"                     {return (LBRACE);}
+"}"                     {return (RBRACE);}
+"."                     {return (DOT);}
+","                     {return (COMMA);}
+"+"                     {return (PLUS);}
+"-"                     {return (MINUS);}
+"*"                     {return (MUL);}
+"/"                     {return (DIV);}
+"|"                     {return (OR);}
+"&"                     {return (AND);}
+"!"                     {return (NOT);}
+
+
+.      		     {showError(); return(OTHER);}
 
 %%
+
+
+void showError(){
+    printf("Other input");
+}

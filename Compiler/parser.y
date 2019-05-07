@@ -1,62 +1,92 @@
+
 %{
-    #include <cstdio>
-    #include <cstdlib>
-  	
-    extern int yylex();
-	void yyerror(const char *s) { std::printf("Error: %s\n", s);std::exit(1); }
+#include <stdio.h>
+
+int yylex();
+int yyerror(char *s);
+
 %}
 
-
-%union {
-    std::string *string;
-	int token;
-}
+%token NUM OTHER SEMICOLON
 
 
-%token  IDENTIFIER DOUBLE INTEGER
-%token  EQUAL CEQ CLT CGT
-%token  LPAREN RPAREN LBRACE RBRACE
-%token  DOT COMMA
-%token  PLUS MINUS MUL DIV
-%token  OR AND NOT
-%token  WHILE IF ELSE
+%token IDENTIFIER DOUBLE INTEGER
+%token EQUAL CEQ CLT CGT
+%token LPAREN RPAREN LBRACE RBRACE
+%token DOT COMMA
+%token PLUS MINUS MUL DIV
+%token OR AND NOT
+%token WHILE IF ELSE
 
-
-%token DOUBLE INTEGER 
 %token type-name
 
 
-%left PLUS MINUS
-%left MUL DIV
+%union{
+	char name[20];
+    int number;
+}
 
-%start translation-unit 
 
 %%
 
-translation-unit 
-    : {external-declaration}
+prog: 
+    |external-declaration prog  
 
 external-declaration 
     : function-definition
     | declaration
 
-function-definition 
-    : {declaration-specifier} declarator {declaration} compound-statement
+function-definition
+    : declaration-specifier declarator declaration compound-statement
+    | compound-statement
+
+declaration 
+    : declaration-specifier init-declarator ; 
 
 declaration-specifier 
     : type-specifier
-                        
+            
 type-specifier 
     : INTEGER
     | DOUBLE
-                        
+            
+init-declarator 
+    : declarator
+    | declarator EQUAL initializer
+
 declarator 
     : direct-declarator
 
 direct-declarator 
     : IDENTIFIER
-                      
-constant-expression 
+
+initializer 
+    : assignment-expression
+
+assignment-expression 
+    : unary-expression assignment-operator assignment-expression
+    | conditional-expression
+
+unary-expression 
+    : postfix-expression
+      
+postfix-expression 
+    : primary-expression
+    | postfix-expression DOT IDENTIFIER
+
+primary-expression 
+    : IDENTIFIER
+    | constant
+    | LPAREN expression RPAREN
+
+constant
+    : NUM 
+
+expression 
+    : assignment-expression
+
+
+conditional-expression 
     : inclusive-or-expression
 
 inclusive-or-expression 
@@ -72,9 +102,9 @@ equality-expression
     | equality-expression CEQ relational-expression
 
 relational-expression 
-    : relational-expression CLT additive-expression
+    : additive-expression 
+    | relational-expression CLT additive-expression
     | relational-expression CGT additive-expression
-
 
 additive-expression 
     : multiplicative-expression
@@ -82,75 +112,24 @@ additive-expression
     | additive-expression MINUS multiplicative-expression
 
 multiplicative-expression 
-    : cast-expression
-    | multiplicative-expression MUL cast-expression
-    | multiplicative-expression DIV cast-expression
-
-
-cast-expression 
     : unary-expression
-    | LPAREN type-name RPAREN cast-expression
-
-unary-expression 
-    : postfix-expression
-    | unary-operator cast-expression
-                     
-postfix-expression 
-    : primary-expression
-    | postfix-expression LPAREN {assignment-expression} RPAREN
-    | postfix-expression DOT IDENTIFIER
-                       
-                  
-primary-expression 
-    : IDENTIFIER
-    | LPAREN expression RPAREN
-
-
-expression 
-    : assignment-expression
-    | expression COMMA assignment-expression
-
-assignment-expression 
-    : unary-expression assignment-operator assignment-expression
+    | multiplicative-expression MUL unary-expression
+    | multiplicative-expression DIV unary-expression
 
 assignment-operator 
     : EQUAL
-
-unary-operator 
-    : AND
-    | MUL
-    | PLUS
-    | MINUS
-    | NOT
-
-declaration 
-    :  {declaration-specifier} {init-declarator} ;
-
-init-declarator 
-    : declarator
-    | declarator EQUAL initializer
-
-initializer 
-    : assignment-expression
-    | { initializer-list }
-    | { initializer-list COMMA }
-
-initializer-list 
-    : initializer
-    | initializer-list COMMA initializer
-
-
+                           
 compound-statement 
-    : { {declaration} {statement} }
-
+    : statement
+ 
 statement 
     : expression-statement
     | compound-statement
     | selection-statement
     | iteration-statement
 
-expression-statement 
-    : {expression};
+expression-statement : 
+    |expression;
 
 selection-statement 
     : IF LPAREN expression RPAREN statement
@@ -159,4 +138,18 @@ selection-statement
 iteration-statement 
     : WHILE LPAREN expression RPAREN statement
 
+
 %%
+
+int yyerror(char *s)
+{
+	printf("Syntax Error on line %s\n", s);
+	return 0;
+}
+
+
+int main()
+{
+    yyparse();
+    return 0;
+}

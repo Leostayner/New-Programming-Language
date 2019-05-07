@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_PARSER_HPP_INCLUDED
-# define YY_YY_PARSER_HPP_INCLUDED
+#ifndef YY_YY_PARSER_TAB_H_INCLUDED
+# define YY_YY_PARSER_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -45,29 +45,32 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    IDENTIFIER = 258,
-    DOUBLE = 259,
-    INTEGER = 260,
-    EQUAL = 261,
-    CEQ = 262,
-    CLT = 263,
-    CGT = 264,
-    LPAREN = 265,
-    RPAREN = 266,
-    LBRACE = 267,
-    RBRACE = 268,
-    DOT = 269,
-    COMMA = 270,
-    PLUS = 271,
-    MINUS = 272,
-    MUL = 273,
-    DIV = 274,
-    OR = 275,
-    AND = 276,
-    NOT = 277,
-    WHILE = 278,
-    IF = 279,
-    ELSE = 280
+    NUM = 258,
+    OTHER = 259,
+    SEMICOLON = 260,
+    IDENTIFIER = 261,
+    DOUBLE = 262,
+    INTEGER = 263,
+    EQUAL = 264,
+    CEQ = 265,
+    CLT = 266,
+    CGT = 267,
+    LPAREN = 268,
+    RPAREN = 269,
+    LBRACE = 270,
+    RBRACE = 271,
+    DOT = 272,
+    COMMA = 273,
+    PLUS = 274,
+    MINUS = 275,
+    MUL = 276,
+    DIV = 277,
+    OR = 278,
+    AND = 279,
+    NOT = 280,
+    WHILE = 281,
+    IF = 282,
+    ELSE = 283
   };
 #endif
 
@@ -76,12 +79,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 8 "parser.y" /* yacc.c:1909  */
+#line 24 "parser.y" /* yacc.c:1909  */
 
-    std::string *string;
-	int token;
+	char name[20];
+    int number;
 
-#line 85 "parser.hpp" /* yacc.c:1909  */
+#line 88 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -94,4 +97,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_PARSER_HPP_INCLUDED  */
+#endif /* !YY_YY_PARSER_TAB_H_INCLUDED  */
