@@ -1,0 +1,1213 @@
+Terminais sem uso na gramática
+
+   OTHER
+   SEMICOLON
+   DOT
+   COMMA
+   NOT
+   type-name
+
+
+Estado 0 conflitos: 7 de deslocamento/redução, 1 de redução/redução
+Estado 9 conflitos: 7 de deslocamento/redução, 1 de redução/redução
+Estado 25 conflitos: 8 de redução/redução
+Estado 75 conflitos: 1 de deslocamento/redução
+Estado 76 conflitos: 1 de deslocamento/redução
+Estado 77 conflitos: 1 de deslocamento/redução
+Estado 83 conflitos: 1 de deslocamento/redução
+
+
+Gramática
+
+    0 $accept: prog $end
+
+    1 prog: %empty
+    2     | external-declaration prog
+
+    3 external-declaration: function-definition
+    4                     | declaration
+
+    5 function-definition: FFLAG type-specifier declarator declaration LBRACE compound-statement RBRACE
+    6                    | compound-statement
+
+    7 declaration: init-declarator
+
+    8 type-specifier: INTEGER
+    9               | DOUBLE
+
+   10 init-declarator: VFLAG declarator
+   11                | VFLAG declarator EQUAL assignment-expression
+
+   12 declarator: IDENTIFIER
+
+   13 assignment-expression: unary-expression assignment-operator assignment-expression
+   14                      | conditional-expression
+
+   15 unary-expression: postfix-expression
+
+   16 postfix-expression: primary-expression
+
+   17 primary-expression: IDENTIFIER
+   18                   | NUM
+   19                   | LPAREN expression RPAREN
+
+   20 expression: assignment-expression
+
+   21 conditional-expression: inclusive-or-expression
+
+   22 inclusive-or-expression: and-expression
+   23                        | inclusive-or-expression OR and-expression
+
+   24 and-expression: equality-expression
+   25               | and-expression AND equality-expression
+
+   26 equality-expression: relational-expression
+   27                    | equality-expression CEQ relational-expression
+
+   28 relational-expression: additive-expression
+   29                      | relational-expression CLT additive-expression
+   30                      | relational-expression CGT additive-expression
+
+   31 additive-expression: multiplicative-expression
+   32                    | additive-expression PLUS multiplicative-expression
+   33                    | additive-expression MINUS multiplicative-expression
+
+   34 multiplicative-expression: unary-expression
+   35                          | multiplicative-expression MUL unary-expression
+   36                          | multiplicative-expression DIV unary-expression
+
+   37 assignment-operator: EQUAL
+
+   38 compound-statement: statement
+
+   39 statement: expression-statement
+   40          | compound-statement
+   41          | selection-statement
+   42          | iteration-statement
+
+   43 expression-statement: %empty
+   44                     | expression
+
+   45 selection-statement: IF LPAREN expression RPAREN LBRACE statement RBRACE
+   46                    | IF LPAREN expression RPAREN LBRACE statement RBRACE ELSE RBRACE statement RBRACE
+
+   47 iteration-statement: WHILE LPAREN expression RPAREN LBRACE statement RBRACE
+
+
+Terminais, com as regras onde eles aparecem
+
+$end (0) 0
+error (256)
+NUM (258) 18
+OTHER (259)
+SEMICOLON (260)
+IDENTIFIER (261) 12 17
+DOUBLE (262) 9
+INTEGER (263) 8
+EQUAL (264) 11 37
+CEQ (265) 27
+CLT (266) 29
+CGT (267) 30
+LPAREN (268) 19 45 46 47
+RPAREN (269) 19 45 46 47
+LBRACE (270) 5 45 46 47
+RBRACE (271) 5 45 46 47
+DOT (272)
+COMMA (273)
+PLUS (274) 32
+MINUS (275) 33
+MUL (276) 35
+DIV (277) 36
+OR (278) 23
+AND (279) 25
+NOT (280)
+WHILE (281) 47
+IF (282) 45 46
+ELSE (283) 46
+VFLAG (284) 10 11
+FFLAG (285) 5
+type-name (286)
+
+
+Não terminais com as regras onde eles aparecem
+
+$accept (32)
+    à esquerda: 0
+prog (33)
+    à esquerda: 1 2, à direita: 0 2
+external-declaration (34)
+    à esquerda: 3 4, à direita: 2
+function-definition (35)
+    à esquerda: 5 6, à direita: 3
+declaration (36)
+    à esquerda: 7, à direita: 4 5
+type-specifier (37)
+    à esquerda: 8 9, à direita: 5
+init-declarator (38)
+    à esquerda: 10 11, à direita: 7
+declarator (39)
+    à esquerda: 12, à direita: 5 10 11
+assignment-expression (40)
+    à esquerda: 13 14, à direita: 11 13 20
+unary-expression (41)
+    à esquerda: 15, à direita: 13 34 35 36
+postfix-expression (42)
+    à esquerda: 16, à direita: 15
+primary-expression (43)
+    à esquerda: 17 18 19, à direita: 16
+expression (44)
+    à esquerda: 20, à direita: 19 44 45 46 47
+conditional-expression (45)
+    à esquerda: 21, à direita: 14
+inclusive-or-expression (46)
+    à esquerda: 22 23, à direita: 21 23
+and-expression (47)
+    à esquerda: 24 25, à direita: 22 23 25
+equality-expression (48)
+    à esquerda: 26 27, à direita: 24 25 27
+relational-expression (49)
+    à esquerda: 28 29 30, à direita: 26 27 29 30
+additive-expression (50)
+    à esquerda: 31 32 33, à direita: 28 29 30 32 33
+multiplicative-expression (51)
+    à esquerda: 34 35 36, à direita: 31 32 33 35 36
+assignment-operator (52)
+    à esquerda: 37, à direita: 13
+compound-statement (53)
+    à esquerda: 38, à direita: 5 6 40
+statement (54)
+    à esquerda: 39 40 41 42, à direita: 38 45 46 47
+expression-statement (55)
+    à esquerda: 43 44, à direita: 39
+selection-statement (56)
+    à esquerda: 45 46, à direita: 41
+iteration-statement (57)
+    à esquerda: 47, à direita: 42
+
+
+Estado 0
+
+    0 $accept: . prog $end
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+    WHILE       deslocar, e ir ao estado 4
+    IF          deslocar, e ir ao estado 5
+    VFLAG       deslocar, e ir ao estado 6
+    FFLAG       deslocar, e ir ao estado 7
+
+    $end        reduzir usando a regra 1 (prog)
+    $end        [reduzir usando a regra 43 (expression-statement)]
+    NUM         [reduzir usando a regra 43 (expression-statement)]
+    IDENTIFIER  [reduzir usando a regra 43 (expression-statement)]
+    LPAREN      [reduzir usando a regra 43 (expression-statement)]
+    WHILE       [reduzir usando a regra 43 (expression-statement)]
+    IF          [reduzir usando a regra 43 (expression-statement)]
+    VFLAG       [reduzir usando a regra 43 (expression-statement)]
+    FFLAG       [reduzir usando a regra 43 (expression-statement)]
+    $padrão    reduzir usando a regra 1 (prog)
+
+    prog                       ir ao estado 8
+    external-declaration       ir ao estado 9
+    function-definition        ir ao estado 10
+    declaration                ir ao estado 11
+    init-declarator            ir ao estado 12
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 17
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+    compound-statement         ir ao estado 25
+    statement                  ir ao estado 26
+    expression-statement       ir ao estado 27
+    selection-statement        ir ao estado 28
+    iteration-statement        ir ao estado 29
+
+
+Estado 1
+
+   18 primary-expression: NUM .
+
+    $padrão  reduzir usando a regra 18 (primary-expression)
+
+
+Estado 2
+
+   17 primary-expression: IDENTIFIER .
+
+    $padrão  reduzir usando a regra 17 (primary-expression)
+
+
+Estado 3
+
+   19 primary-expression: LPAREN . expression RPAREN
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 30
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 4
+
+   47 iteration-statement: WHILE . LPAREN expression RPAREN LBRACE statement RBRACE
+
+    LPAREN  deslocar, e ir ao estado 31
+
+
+Estado 5
+
+   45 selection-statement: IF . LPAREN expression RPAREN LBRACE statement RBRACE
+   46                    | IF . LPAREN expression RPAREN LBRACE statement RBRACE ELSE RBRACE statement RBRACE
+
+    LPAREN  deslocar, e ir ao estado 32
+
+
+Estado 6
+
+   10 init-declarator: VFLAG . declarator
+   11                | VFLAG . declarator EQUAL assignment-expression
+
+    IDENTIFIER  deslocar, e ir ao estado 33
+
+    declarator  ir ao estado 34
+
+
+Estado 7
+
+    5 function-definition: FFLAG . type-specifier declarator declaration LBRACE compound-statement RBRACE
+
+    DOUBLE   deslocar, e ir ao estado 35
+    INTEGER  deslocar, e ir ao estado 36
+
+    type-specifier  ir ao estado 37
+
+
+Estado 8
+
+    0 $accept: prog . $end
+
+    $end  deslocar, e ir ao estado 38
+
+
+Estado 9
+
+    2 prog: external-declaration . prog
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+    WHILE       deslocar, e ir ao estado 4
+    IF          deslocar, e ir ao estado 5
+    VFLAG       deslocar, e ir ao estado 6
+    FFLAG       deslocar, e ir ao estado 7
+
+    $end        reduzir usando a regra 1 (prog)
+    $end        [reduzir usando a regra 43 (expression-statement)]
+    NUM         [reduzir usando a regra 43 (expression-statement)]
+    IDENTIFIER  [reduzir usando a regra 43 (expression-statement)]
+    LPAREN      [reduzir usando a regra 43 (expression-statement)]
+    WHILE       [reduzir usando a regra 43 (expression-statement)]
+    IF          [reduzir usando a regra 43 (expression-statement)]
+    VFLAG       [reduzir usando a regra 43 (expression-statement)]
+    FFLAG       [reduzir usando a regra 43 (expression-statement)]
+    $padrão    reduzir usando a regra 1 (prog)
+
+    prog                       ir ao estado 39
+    external-declaration       ir ao estado 9
+    function-definition        ir ao estado 10
+    declaration                ir ao estado 11
+    init-declarator            ir ao estado 12
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 17
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+    compound-statement         ir ao estado 25
+    statement                  ir ao estado 26
+    expression-statement       ir ao estado 27
+    selection-statement        ir ao estado 28
+    iteration-statement        ir ao estado 29
+
+
+Estado 10
+
+    3 external-declaration: function-definition .
+
+    $padrão  reduzir usando a regra 3 (external-declaration)
+
+
+Estado 11
+
+    4 external-declaration: declaration .
+
+    $padrão  reduzir usando a regra 4 (external-declaration)
+
+
+Estado 12
+
+    7 declaration: init-declarator .
+
+    $padrão  reduzir usando a regra 7 (declaration)
+
+
+Estado 13
+
+   20 expression: assignment-expression .
+
+    $padrão  reduzir usando a regra 20 (expression)
+
+
+Estado 14
+
+   13 assignment-expression: unary-expression . assignment-operator assignment-expression
+   34 multiplicative-expression: unary-expression .
+
+    EQUAL  deslocar, e ir ao estado 40
+
+    $padrão  reduzir usando a regra 34 (multiplicative-expression)
+
+    assignment-operator  ir ao estado 41
+
+
+Estado 15
+
+   15 unary-expression: postfix-expression .
+
+    $padrão  reduzir usando a regra 15 (unary-expression)
+
+
+Estado 16
+
+   16 postfix-expression: primary-expression .
+
+    $padrão  reduzir usando a regra 16 (postfix-expression)
+
+
+Estado 17
+
+   44 expression-statement: expression .
+
+    $padrão  reduzir usando a regra 44 (expression-statement)
+
+
+Estado 18
+
+   14 assignment-expression: conditional-expression .
+
+    $padrão  reduzir usando a regra 14 (assignment-expression)
+
+
+Estado 19
+
+   21 conditional-expression: inclusive-or-expression .
+   23 inclusive-or-expression: inclusive-or-expression . OR and-expression
+
+    OR  deslocar, e ir ao estado 42
+
+    $padrão  reduzir usando a regra 21 (conditional-expression)
+
+
+Estado 20
+
+   22 inclusive-or-expression: and-expression .
+   25 and-expression: and-expression . AND equality-expression
+
+    AND  deslocar, e ir ao estado 43
+
+    $padrão  reduzir usando a regra 22 (inclusive-or-expression)
+
+
+Estado 21
+
+   24 and-expression: equality-expression .
+   27 equality-expression: equality-expression . CEQ relational-expression
+
+    CEQ  deslocar, e ir ao estado 44
+
+    $padrão  reduzir usando a regra 24 (and-expression)
+
+
+Estado 22
+
+   26 equality-expression: relational-expression .
+   29 relational-expression: relational-expression . CLT additive-expression
+   30                      | relational-expression . CGT additive-expression
+
+    CLT  deslocar, e ir ao estado 45
+    CGT  deslocar, e ir ao estado 46
+
+    $padrão  reduzir usando a regra 26 (equality-expression)
+
+
+Estado 23
+
+   28 relational-expression: additive-expression .
+   32 additive-expression: additive-expression . PLUS multiplicative-expression
+   33                    | additive-expression . MINUS multiplicative-expression
+
+    PLUS   deslocar, e ir ao estado 47
+    MINUS  deslocar, e ir ao estado 48
+
+    $padrão  reduzir usando a regra 28 (relational-expression)
+
+
+Estado 24
+
+   31 additive-expression: multiplicative-expression .
+   35 multiplicative-expression: multiplicative-expression . MUL unary-expression
+   36                          | multiplicative-expression . DIV unary-expression
+
+    MUL  deslocar, e ir ao estado 49
+    DIV  deslocar, e ir ao estado 50
+
+    $padrão  reduzir usando a regra 31 (additive-expression)
+
+
+Estado 25
+
+    6 function-definition: compound-statement .
+   40 statement: compound-statement .
+
+    $end        reduzir usando a regra 6 (function-definition)
+    $end        [reduzir usando a regra 40 (statement)]
+    NUM         reduzir usando a regra 6 (function-definition)
+    NUM         [reduzir usando a regra 40 (statement)]
+    IDENTIFIER  reduzir usando a regra 6 (function-definition)
+    IDENTIFIER  [reduzir usando a regra 40 (statement)]
+    LPAREN      reduzir usando a regra 6 (function-definition)
+    LPAREN      [reduzir usando a regra 40 (statement)]
+    WHILE       reduzir usando a regra 6 (function-definition)
+    WHILE       [reduzir usando a regra 40 (statement)]
+    IF          reduzir usando a regra 6 (function-definition)
+    IF          [reduzir usando a regra 40 (statement)]
+    VFLAG       reduzir usando a regra 6 (function-definition)
+    VFLAG       [reduzir usando a regra 40 (statement)]
+    FFLAG       reduzir usando a regra 6 (function-definition)
+    FFLAG       [reduzir usando a regra 40 (statement)]
+    $padrão    reduzir usando a regra 6 (function-definition)
+
+
+Estado 26
+
+   38 compound-statement: statement .
+
+    $padrão  reduzir usando a regra 38 (compound-statement)
+
+
+Estado 27
+
+   39 statement: expression-statement .
+
+    $padrão  reduzir usando a regra 39 (statement)
+
+
+Estado 28
+
+   41 statement: selection-statement .
+
+    $padrão  reduzir usando a regra 41 (statement)
+
+
+Estado 29
+
+   42 statement: iteration-statement .
+
+    $padrão  reduzir usando a regra 42 (statement)
+
+
+Estado 30
+
+   19 primary-expression: LPAREN expression . RPAREN
+
+    RPAREN  deslocar, e ir ao estado 51
+
+
+Estado 31
+
+   47 iteration-statement: WHILE LPAREN . expression RPAREN LBRACE statement RBRACE
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 52
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 32
+
+   45 selection-statement: IF LPAREN . expression RPAREN LBRACE statement RBRACE
+   46                    | IF LPAREN . expression RPAREN LBRACE statement RBRACE ELSE RBRACE statement RBRACE
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 53
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 33
+
+   12 declarator: IDENTIFIER .
+
+    $padrão  reduzir usando a regra 12 (declarator)
+
+
+Estado 34
+
+   10 init-declarator: VFLAG declarator .
+   11                | VFLAG declarator . EQUAL assignment-expression
+
+    EQUAL  deslocar, e ir ao estado 54
+
+    $padrão  reduzir usando a regra 10 (init-declarator)
+
+
+Estado 35
+
+    9 type-specifier: DOUBLE .
+
+    $padrão  reduzir usando a regra 9 (type-specifier)
+
+
+Estado 36
+
+    8 type-specifier: INTEGER .
+
+    $padrão  reduzir usando a regra 8 (type-specifier)
+
+
+Estado 37
+
+    5 function-definition: FFLAG type-specifier . declarator declaration LBRACE compound-statement RBRACE
+
+    IDENTIFIER  deslocar, e ir ao estado 33
+
+    declarator  ir ao estado 55
+
+
+Estado 38
+
+    0 $accept: prog $end .
+
+    $padrão  aceitar
+
+
+Estado 39
+
+    2 prog: external-declaration prog .
+
+    $padrão  reduzir usando a regra 2 (prog)
+
+
+Estado 40
+
+   37 assignment-operator: EQUAL .
+
+    $padrão  reduzir usando a regra 37 (assignment-operator)
+
+
+Estado 41
+
+   13 assignment-expression: unary-expression assignment-operator . assignment-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    assignment-expression      ir ao estado 56
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 42
+
+   23 inclusive-or-expression: inclusive-or-expression OR . and-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression           ir ao estado 57
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    and-expression             ir ao estado 58
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 43
+
+   25 and-expression: and-expression AND . equality-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression           ir ao estado 57
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    equality-expression        ir ao estado 59
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 44
+
+   27 equality-expression: equality-expression CEQ . relational-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression           ir ao estado 57
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    relational-expression      ir ao estado 60
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 45
+
+   29 relational-expression: relational-expression CLT . additive-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression           ir ao estado 57
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    additive-expression        ir ao estado 61
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 46
+
+   30 relational-expression: relational-expression CGT . additive-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression           ir ao estado 57
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    additive-expression        ir ao estado 62
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 47
+
+   32 additive-expression: additive-expression PLUS . multiplicative-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression           ir ao estado 57
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    multiplicative-expression  ir ao estado 63
+
+
+Estado 48
+
+   33 additive-expression: additive-expression MINUS . multiplicative-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression           ir ao estado 57
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    multiplicative-expression  ir ao estado 64
+
+
+Estado 49
+
+   35 multiplicative-expression: multiplicative-expression MUL . unary-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression    ir ao estado 65
+    postfix-expression  ir ao estado 15
+    primary-expression  ir ao estado 16
+
+
+Estado 50
+
+   36 multiplicative-expression: multiplicative-expression DIV . unary-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    unary-expression    ir ao estado 66
+    postfix-expression  ir ao estado 15
+    primary-expression  ir ao estado 16
+
+
+Estado 51
+
+   19 primary-expression: LPAREN expression RPAREN .
+
+    $padrão  reduzir usando a regra 19 (primary-expression)
+
+
+Estado 52
+
+   47 iteration-statement: WHILE LPAREN expression . RPAREN LBRACE statement RBRACE
+
+    RPAREN  deslocar, e ir ao estado 67
+
+
+Estado 53
+
+   45 selection-statement: IF LPAREN expression . RPAREN LBRACE statement RBRACE
+   46                    | IF LPAREN expression . RPAREN LBRACE statement RBRACE ELSE RBRACE statement RBRACE
+
+    RPAREN  deslocar, e ir ao estado 68
+
+
+Estado 54
+
+   11 init-declarator: VFLAG declarator EQUAL . assignment-expression
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+
+    assignment-expression      ir ao estado 69
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+
+
+Estado 55
+
+    5 function-definition: FFLAG type-specifier declarator . declaration LBRACE compound-statement RBRACE
+
+    VFLAG  deslocar, e ir ao estado 6
+
+    declaration      ir ao estado 70
+    init-declarator  ir ao estado 12
+
+
+Estado 56
+
+   13 assignment-expression: unary-expression assignment-operator assignment-expression .
+
+    $padrão  reduzir usando a regra 13 (assignment-expression)
+
+
+Estado 57
+
+   34 multiplicative-expression: unary-expression .
+
+    $padrão  reduzir usando a regra 34 (multiplicative-expression)
+
+
+Estado 58
+
+   23 inclusive-or-expression: inclusive-or-expression OR and-expression .
+   25 and-expression: and-expression . AND equality-expression
+
+    AND  deslocar, e ir ao estado 43
+
+    $padrão  reduzir usando a regra 23 (inclusive-or-expression)
+
+
+Estado 59
+
+   25 and-expression: and-expression AND equality-expression .
+   27 equality-expression: equality-expression . CEQ relational-expression
+
+    CEQ  deslocar, e ir ao estado 44
+
+    $padrão  reduzir usando a regra 25 (and-expression)
+
+
+Estado 60
+
+   27 equality-expression: equality-expression CEQ relational-expression .
+   29 relational-expression: relational-expression . CLT additive-expression
+   30                      | relational-expression . CGT additive-expression
+
+    CLT  deslocar, e ir ao estado 45
+    CGT  deslocar, e ir ao estado 46
+
+    $padrão  reduzir usando a regra 27 (equality-expression)
+
+
+Estado 61
+
+   29 relational-expression: relational-expression CLT additive-expression .
+   32 additive-expression: additive-expression . PLUS multiplicative-expression
+   33                    | additive-expression . MINUS multiplicative-expression
+
+    PLUS   deslocar, e ir ao estado 47
+    MINUS  deslocar, e ir ao estado 48
+
+    $padrão  reduzir usando a regra 29 (relational-expression)
+
+
+Estado 62
+
+   30 relational-expression: relational-expression CGT additive-expression .
+   32 additive-expression: additive-expression . PLUS multiplicative-expression
+   33                    | additive-expression . MINUS multiplicative-expression
+
+    PLUS   deslocar, e ir ao estado 47
+    MINUS  deslocar, e ir ao estado 48
+
+    $padrão  reduzir usando a regra 30 (relational-expression)
+
+
+Estado 63
+
+   32 additive-expression: additive-expression PLUS multiplicative-expression .
+   35 multiplicative-expression: multiplicative-expression . MUL unary-expression
+   36                          | multiplicative-expression . DIV unary-expression
+
+    MUL  deslocar, e ir ao estado 49
+    DIV  deslocar, e ir ao estado 50
+
+    $padrão  reduzir usando a regra 32 (additive-expression)
+
+
+Estado 64
+
+   33 additive-expression: additive-expression MINUS multiplicative-expression .
+   35 multiplicative-expression: multiplicative-expression . MUL unary-expression
+   36                          | multiplicative-expression . DIV unary-expression
+
+    MUL  deslocar, e ir ao estado 49
+    DIV  deslocar, e ir ao estado 50
+
+    $padrão  reduzir usando a regra 33 (additive-expression)
+
+
+Estado 65
+
+   35 multiplicative-expression: multiplicative-expression MUL unary-expression .
+
+    $padrão  reduzir usando a regra 35 (multiplicative-expression)
+
+
+Estado 66
+
+   36 multiplicative-expression: multiplicative-expression DIV unary-expression .
+
+    $padrão  reduzir usando a regra 36 (multiplicative-expression)
+
+
+Estado 67
+
+   47 iteration-statement: WHILE LPAREN expression RPAREN . LBRACE statement RBRACE
+
+    LBRACE  deslocar, e ir ao estado 71
+
+
+Estado 68
+
+   45 selection-statement: IF LPAREN expression RPAREN . LBRACE statement RBRACE
+   46                    | IF LPAREN expression RPAREN . LBRACE statement RBRACE ELSE RBRACE statement RBRACE
+
+    LBRACE  deslocar, e ir ao estado 72
+
+
+Estado 69
+
+   11 init-declarator: VFLAG declarator EQUAL assignment-expression .
+
+    $padrão  reduzir usando a regra 11 (init-declarator)
+
+
+Estado 70
+
+    5 function-definition: FFLAG type-specifier declarator declaration . LBRACE compound-statement RBRACE
+
+    LBRACE  deslocar, e ir ao estado 73
+
+
+Estado 71
+
+   47 iteration-statement: WHILE LPAREN expression RPAREN LBRACE . statement RBRACE
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+    WHILE       deslocar, e ir ao estado 4
+    IF          deslocar, e ir ao estado 5
+
+    $padrão  reduzir usando a regra 43 (expression-statement)
+
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 17
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+    compound-statement         ir ao estado 74
+    statement                  ir ao estado 75
+    expression-statement       ir ao estado 27
+    selection-statement        ir ao estado 28
+    iteration-statement        ir ao estado 29
+
+
+Estado 72
+
+   45 selection-statement: IF LPAREN expression RPAREN LBRACE . statement RBRACE
+   46                    | IF LPAREN expression RPAREN LBRACE . statement RBRACE ELSE RBRACE statement RBRACE
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+    WHILE       deslocar, e ir ao estado 4
+    IF          deslocar, e ir ao estado 5
+
+    $padrão  reduzir usando a regra 43 (expression-statement)
+
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 17
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+    compound-statement         ir ao estado 74
+    statement                  ir ao estado 76
+    expression-statement       ir ao estado 27
+    selection-statement        ir ao estado 28
+    iteration-statement        ir ao estado 29
+
+
+Estado 73
+
+    5 function-definition: FFLAG type-specifier declarator declaration LBRACE . compound-statement RBRACE
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+    WHILE       deslocar, e ir ao estado 4
+    IF          deslocar, e ir ao estado 5
+
+    $padrão  reduzir usando a regra 43 (expression-statement)
+
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 17
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+    compound-statement         ir ao estado 77
+    statement                  ir ao estado 26
+    expression-statement       ir ao estado 27
+    selection-statement        ir ao estado 28
+    iteration-statement        ir ao estado 29
+
+
+Estado 74
+
+   40 statement: compound-statement .
+
+    $padrão  reduzir usando a regra 40 (statement)
+
+
+Estado 75
+
+   38 compound-statement: statement .
+   47 iteration-statement: WHILE LPAREN expression RPAREN LBRACE statement . RBRACE
+
+    RBRACE  deslocar, e ir ao estado 78
+
+    RBRACE  [reduzir usando a regra 38 (compound-statement)]
+
+
+Estado 76
+
+   38 compound-statement: statement .
+   45 selection-statement: IF LPAREN expression RPAREN LBRACE statement . RBRACE
+   46                    | IF LPAREN expression RPAREN LBRACE statement . RBRACE ELSE RBRACE statement RBRACE
+
+    RBRACE  deslocar, e ir ao estado 79
+
+    RBRACE  [reduzir usando a regra 38 (compound-statement)]
+
+
+Estado 77
+
+    5 function-definition: FFLAG type-specifier declarator declaration LBRACE compound-statement . RBRACE
+   40 statement: compound-statement .
+
+    RBRACE  deslocar, e ir ao estado 80
+
+    RBRACE  [reduzir usando a regra 40 (statement)]
+
+
+Estado 78
+
+   47 iteration-statement: WHILE LPAREN expression RPAREN LBRACE statement RBRACE .
+
+    $padrão  reduzir usando a regra 47 (iteration-statement)
+
+
+Estado 79
+
+   45 selection-statement: IF LPAREN expression RPAREN LBRACE statement RBRACE .
+   46                    | IF LPAREN expression RPAREN LBRACE statement RBRACE . ELSE RBRACE statement RBRACE
+
+    ELSE  deslocar, e ir ao estado 81
+
+    $padrão  reduzir usando a regra 45 (selection-statement)
+
+
+Estado 80
+
+    5 function-definition: FFLAG type-specifier declarator declaration LBRACE compound-statement RBRACE .
+
+    $padrão  reduzir usando a regra 5 (function-definition)
+
+
+Estado 81
+
+   46 selection-statement: IF LPAREN expression RPAREN LBRACE statement RBRACE ELSE . RBRACE statement RBRACE
+
+    RBRACE  deslocar, e ir ao estado 82
+
+
+Estado 82
+
+   46 selection-statement: IF LPAREN expression RPAREN LBRACE statement RBRACE ELSE RBRACE . statement RBRACE
+
+    NUM         deslocar, e ir ao estado 1
+    IDENTIFIER  deslocar, e ir ao estado 2
+    LPAREN      deslocar, e ir ao estado 3
+    WHILE       deslocar, e ir ao estado 4
+    IF          deslocar, e ir ao estado 5
+
+    $padrão  reduzir usando a regra 43 (expression-statement)
+
+    assignment-expression      ir ao estado 13
+    unary-expression           ir ao estado 14
+    postfix-expression         ir ao estado 15
+    primary-expression         ir ao estado 16
+    expression                 ir ao estado 17
+    conditional-expression     ir ao estado 18
+    inclusive-or-expression    ir ao estado 19
+    and-expression             ir ao estado 20
+    equality-expression        ir ao estado 21
+    relational-expression      ir ao estado 22
+    additive-expression        ir ao estado 23
+    multiplicative-expression  ir ao estado 24
+    compound-statement         ir ao estado 74
+    statement                  ir ao estado 83
+    expression-statement       ir ao estado 27
+    selection-statement        ir ao estado 28
+    iteration-statement        ir ao estado 29
+
+
+Estado 83
+
+   38 compound-statement: statement .
+   46 selection-statement: IF LPAREN expression RPAREN LBRACE statement RBRACE ELSE RBRACE statement . RBRACE
+
+    RBRACE  deslocar, e ir ao estado 84
+
+    RBRACE  [reduzir usando a regra 38 (compound-statement)]
+
+
+Estado 84
+
+   46 selection-statement: IF LPAREN expression RPAREN LBRACE statement RBRACE ELSE RBRACE statement RBRACE .
+
+    $padrão  reduzir usando a regra 46 (selection-statement)

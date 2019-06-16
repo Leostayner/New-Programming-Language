@@ -17,7 +17,7 @@ int yyerror(char *s);
 %token PLUS MINUS MUL DIV
 %token OR AND NOT
 %token WHILE IF ELSE
-
+%token VFLAG FFLAG
 %token type-name
 
 
@@ -25,7 +25,6 @@ int yyerror(char *s);
 	char name[20];
     int number;
 }
-
 
 %%
 
@@ -37,31 +36,22 @@ external-declaration
     | declaration
 
 function-definition
-    : declaration-specifier declarator declaration compound-statement
+    : FFLAG type-specifier declarator declaration LBRACE compound-statement RBRACE
     | compound-statement
 
 declaration 
-    : declaration-specifier init-declarator ; 
+    : init-declarator ; 
 
-declaration-specifier 
-    : type-specifier
-            
 type-specifier 
     : INTEGER
     | DOUBLE
             
 init-declarator 
-    : declarator
-    | declarator EQUAL initializer
+    : VFLAG declarator
+    | VFLAG declarator EQUAL assignment-expression
 
 declarator 
-    : direct-declarator
-
-direct-declarator 
     : IDENTIFIER
-
-initializer 
-    : assignment-expression
 
 assignment-expression 
     : unary-expression assignment-operator assignment-expression
@@ -72,19 +62,14 @@ unary-expression
       
 postfix-expression 
     : primary-expression
-    | postfix-expression DOT IDENTIFIER
 
 primary-expression 
     : IDENTIFIER
-    | constant
+    | NUM
     | LPAREN expression RPAREN
-
-constant
-    : NUM 
 
 expression 
     : assignment-expression
-
 
 conditional-expression 
     : inclusive-or-expression
@@ -132,11 +117,11 @@ expression-statement :
     |expression;
 
 selection-statement 
-    : IF LPAREN expression RPAREN statement
-    | IF LPAREN expression RPAREN statement ELSE statement
+    : IF LPAREN expression RPAREN LBRACE statement RBRACE
+    | IF LPAREN expression RPAREN LBRACE statement RBRACE ELSE RBRACE statement RBRACE
 
 iteration-statement 
-    : WHILE LPAREN expression RPAREN statement
+    : WHILE LPAREN expression RPAREN LBRACE statement RBRACE
 
 
 %%

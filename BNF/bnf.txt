@@ -19,92 +19,59 @@
 <external-declaration> ::= <function-definition>
                          | <declaration>
 
-<function-definition> ::= {<declaration-specifier>}* <declarator> {<declaration>}* <compound-statement>
-
-<declaration-specifier> ::= <type-specifier>
+<function-definition> ::= "__function__" <type-specifier> <declarator> {<declaration>}* <compound-statement>
                         
-<type-specifier> ::= void
-                   | char
-                   | int
-                   | float
-                   | double
-                                       
-<declarator> ::= <direct-declarator>
+<declaration> ::=  {<type-specifier>}+ {<init-declarator>}* ;
 
-<direct-declarator> ::= <identifier>
-                      
+<type-specifier> ::= integer
+                    | boolean
+                                       
+<init-declarator> ::= "__var__" <declarator>
+                    | "__var__" <declarator> = assignment-expression
+
+<declarator> ::= <identifier>
+
+<assignment-expression> ::= <conditional-expression>
+                            |<unary-expression> <assignment-operator> <assignment-expression>
+
+<unary-expression> ::= <postfix-expression>
+
+<primary-expression> ::= <identifier>
+                       | <integer-constant>
+                       | ( <expression> )
+
+<expression> ::= <assignment-expression>
+               
 <constant-expression> ::= <inclusive-or-expression>
 
 <inclusive-or-expression> ::= <and-expression>
-                            | <inclusive-or-expression> | <and-expression>
+                            | <inclusive-or-expression> OR <and-expression>
 
 <and-expression> ::= <equality-expression>
-                   | <and-expression> & <equality-expression>
+                   | <and-expression> AND <equality-expression>
 
 <equality-expression> ::= <relational-expression>
-                        | <equality-expression> == <relational-expression>
+                        | <equality-expression> = <relational-expression>
 
-<relational-expression> ::= <relational-expression> < <additive-expression>
-                          | <relational-expression> > <additive-expression>
+<relational-expression> ::= <relational-expression> LT <additive-expression>
+                          | <relational-expression> GT <additive-expression>
 
 
 <additive-expression> ::= <multiplicative-expression>
-                        | <additive-expression> + <multiplicative-expression>
-                        | <additive-expression> - <multiplicative-expression>
+                        | <additive-expression> ADD <multiplicative-expression>
+                        | <additive-expression> SUB <multiplicative-expression>
 
-<multiplicative-expression> ::= <cast-expression>
-                              | <multiplicative-expression> * <cast-expression>
-                              | <multiplicative-expression> / <cast-expression>
+<multiplicative-expression> ::= <unary-expression>
+                              | <multiplicative-expression> MUL <unary-expression>
+                              | <multiplicative-expression> DIV <unary-expression>
 
-
-
-
-<cast-expression> ::= <unary-expression>
-                    | ( <type-name> ) <cast-expression>
-
-<unary-expression> ::= <postfix-expression>
-                     | <unary-operator> <cast-expression>
-                     
-<postfix-expression> ::= <primary-expression>
-                       | <postfix-expression> ( {<assignment-expression>}* )
-                       | <postfix-expression> . <identifier>
-                       
-                  
-<primary-expression> ::= <identifier>
-                       | <constant>
-                       | <string>
-                       | ( <expression> )
-
-<constant> ::= <integer-constant>
-             | <character-constant>
-             | <floating-constant>
-
-<expression> ::= <assignment-expression>
-               | <expression> , <assignment-expression>
-
-<assignment-expression> ::= <unary-expression> <assignment-operator> <assignment-expression>
 
 <assignment-operator> ::= =
 
-<unary-operator> ::= &
-                   | *
-                   | +
-                   | -
-                   | !
-
-<declaration> ::=  {<declaration-specifier>}+ {<init-declarator>}* ;
-
-<init-declarator> ::= <declarator>
-                    | <declarator> = <initializer>
-
-<initializer> ::= <assignment-expression>
-                | { <initializer-list> }
-                | { <initializer-list> , }
-
-<initializer-list> ::= <initializer>
-                     | <initializer-list> , <initializer>
-
-
+<postfix-expression> ::= <primary-expression>
+                       | <postfix-expression> ( {<assignment-expression>}* )
+                       
+                  
 <compound-statement> ::= { {<declaration>}* {<statement>}* }
 
 <statement> ::= <expression-statement>
@@ -112,10 +79,16 @@
               | <selection-statement>
               | <iteration-statement>
 
+
 <expression-statement> ::= {<expression>}? ;
 
-<selection-statement> ::= if ( <expression> ) <statement>
-                        | if ( <expression> ) <statement> else <statement>
+<selection-statement> ::= if ( <expression> ) "{" <statement> "}"
+                        | if ( <expression> ) "{" <statement> "}" else "{" <statement> "}"
 
-<iteration-statement> ::= while ( <expression> ) <statement>
+<iteration-statement> ::= while ( <expression> ) "{" <statement> "}"
 
+<unary-operator> ::= AND
+                   | MUL
+                   | ADD
+                   | SUB
+                   | NOT

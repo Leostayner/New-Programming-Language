@@ -70,7 +70,9 @@ extern int yydebug;
     NOT = 280,
     WHILE = 281,
     IF = 282,
-    ELSE = 283
+    ELSE = 283,
+    VFLAG = 284,
+    FFLAG = 285
   };
 #endif
 
@@ -84,7 +86,7 @@ union YYSTYPE
 	char name[20];
     int number;
 
-#line 88 "parser.tab.h" /* yacc.c:1909  */
+#line 90 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
