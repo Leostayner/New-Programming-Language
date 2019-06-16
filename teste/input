@@ -1,0 +1,34 @@
+__function__ integer teste(){
+    __var__ integer a
+    __var__ integer b
+    __var__ integer result
+
+    a = 10
+    b = input
+
+    while(a GT b){
+        b = b ADD 1 
+        print b
+    }
+
+    if (a GT b){
+        result = 10
+        print result
+
+        if(result = 10){
+            retuls = 20
+        }
+    }
+        
+    else{ 
+        result = 20
+    }
+    
+
+    teste = (a ADD result) DIV 5
+}
+
+__sub__ main(){
+    print teste()
+
+}
