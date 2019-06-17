@@ -333,8 +333,11 @@ class Parser:
 
         while(Parser.tokens.actual.value != "}"):
             l_cn.append(Parser.statement())
-            Parser.checkType("endLine", "asda")
-       
+            if not Parser.flag:
+                Parser.checkType("endLine", "Syntatic Error: expect endline, but recived {0}".format(Parser.tokens.actual.value))
+            
+            Parser.flag = False            
+
         Parser.checkValue("}", "funcSub5")
         
         l_c[0] = (VarDec(children = [Identifier(subName), Tp(None)]))

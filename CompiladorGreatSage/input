@@ -1,34 +1,33 @@
-__function__ integer teste(){
-    __var__ integer a
-    __var__ integer b
-    __var__ integer result
-
-    a = 10
-    b = input
-
-    while(a GT b){
-        b = b ADD 1 
-        print b
+__sub__ numbers(integer n){
+    while(n GT 0){
+        print n
+        n = n SUB 1
     }
-
-    if (a GT b){
-        result = 10
-        print result
-
-        if(result = 10){
-            retuls = 20
-        }
-    }
-        
-    else{ 
-        result = 20
-    }
-    
-
-    teste = (a ADD result) DIV 5
 }
 
-__sub__ main(){
-    print teste()
 
+__function__ integer Fatorial(integer n){
+    if (n = 0){
+        Fatorial = 1
+    }
+
+    else{
+        Fatorial = n MUL Fatorial(n SUB 1)
+    }
+}
+    
+
+__sub__ main(){
+    __var__ integer n
+    __var__ boolean flag
+    
+
+    n    = input
+    flag = True
+
+    if (flag){
+        CALL numbers(n) 'componentes do fatorial
+    }
+
+    print Fatorial(n) 'resultado do fatorial
 }
